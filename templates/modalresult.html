@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    {% include 'metabar.html' %}
+
+  <link rel="stylesheet" href="static/css/bootstrap-material-design.css">
+  <link rel="stylesheet" href="static/css/font-awesome.min.css">
+  <link rel="stylesheet" href="static/css/jquery-ui.css">
+  <link rel="stylesheet" href="static/css/custom.css">
+  <link rel="stylesheet" href="static/css/chartstyles.css">
+  <link rel="stylesheet" href="static/css/tooltipster.bundle.css" />
+
+
+
+
+</head>
+
+<body>
+  <!------------------Modal Boxes Start Here------------------>
+  <div id="pageloaddiv" style="display:none">
+    <div class="spinner spinner-4">
+    </div>
+  </div>
+
+  <div class="card-body" id="scnrcomprsltmodalBox">
+    <div style="float: right;">
+      <a class="btn exprtbtn" href="#" role="button">Export
+        <i class="fa fa-download" aria-hidden="true"></i>
+      </a>
+    </div>
+
+
+
+    <ul class="nav nav-tabs" id="modalmyTab" role="tablist">
+      <li class="nav-item tabtextitem">
+        <a class="nav-link active" id="modalcontribution-tab" data-toggle="tab" href="#modalcontribution" role="tab" aria-controls="modalcontribution"
+          aria-selected="true">Contribution</a>
+      </li>
+      <li class="nav-item tabtextitem">
+        <a class="nav-link" id="modalroi-tab" data-toggle="tab" href="#modalroi" role="tab" aria-controls="modalroi" aria-selected="false">
+        ROI </a>
+      </li>
+     </ul>
+    <div class="tab-content" id="modalmyTabContent">
+      <div class="tab-pane fade show active" id="modalcontribution" role="tabpanel" aria-labelledby="modalcontribution-tab">
+        <form id="scnrrsltform">
+          <div class="row margTB5">
+            <div class="col-sm-12 col-md-4 col-lg-4">
+              <p>Product Group</p>
+              <select id="productdropdown" class="custom-select scnrrsltselct">
+                <option selected>All</option>
+                <option value="1">Alaska</option>
+                <option value="2">Bermuda</option>
+                <option value="3">Caribbean</option>
+                <option value="4">Europe</option>
+                <option value="5">Long Caribbean</option>
+              </select>
+            </div>
+            <div class="col-sm-12 col-md-4 col-lg-4">
+              <p>Channel</p>
+              <select id="channeldropdown" class="custom-select scnrrsltselct">
+                <option selected>All</option>
+                <option value="1">Consumer Outreach</option>
+                <option value="2">Trade-OTA</option>
+                <option value="3">Trade</option>
+                <option value="4">Web</option>
+              </select>
+            </div>
+            <div class="col-sm-12 col-md-4 col-lg-4">
+              <p>Country</p>
+              <select id="countrydropdown" class="custom-select scnrrsltselct">
+                <option selected>All</option>
+                <option value="1">USA</option>
+                <option value="2">CAN</option>
+              </select>
+            </div>
+
+          </div>
+        </form>
+
+        <div class="row margTB5">
+          <div class="col-sm-12 col-md-4 col-lg-4">
+            <div class="card contntBox">
+              <div class="card-body">
+                <p class="cntntBoxhdr">New Scenario Bookings</p>
+                <h4 class="cntntBoxitms" id="newscnrbookonslct">0</h4>
+              </div>
+            </div>
+
+          </div>
+          <div class="col-sm-12 col-md-4 col-lg-4">
+            <div class="card contntBox">
+              <div class="card-body">
+                <p class="cntntBoxhdr">Base Scenario Bookings</p>
+                <h4 class="cntntBoxitms" id="basescnrbookonslct">0</h4>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-12 col-md-4 col-lg-4">
+            <div class="card contntBox">
+              <div class="card-body">
+                <p class="cntntBoxhdr">Change In Bookings</p>
+
+                <h4 class="cntntBoxitms" id="chnginspndonslct">0
+                  <i class="fa fa-arrow-up green" aria-hidden="true"></i>
+                </h4>
+                <h6 id="chnginspndonslctprcnt" class="cntntBoxitms_suffix">(0%)</h6>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="row margTB5">
+          <div class="col-sm-12 col-md-4 col-lg-4">
+            <div class="card  mb-2">
+              <div class="card-body py-2" id="scnrrsltpieChart"></div>
+            </div>
+
+            <div class="card">
+              <div class="card-body py-2" id="scnrrsltpieChartBase"></div>
+            </div>
+
+          </div>
+          <div class="col-sm-12 col-md-8 col-lg-8">
+            <div class="card">
+              <h6 class="text-center mt-2 font-weight-bold">New Scenario Contributions</h6>
+              <div class="card-body chartsvg" id="incrmtblowChart">
+
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <div class="row margTB5">
+          <div class="col-sm-12 col-md-4 col-lg-4">
+            <div class="card mb-2">
+              <div class="card-body py-2" id="scnrrsltpieChart2"></div>
+            </div>
+
+            <div class="card">
+              <div class="card-body py-2" id="scnrrsltpieChartBase2"></div>
+            </div>
+
+          </div>
+          <div class="col-sm-12 col-md-8 col-lg-8">
+            <div class="card">
+              <h6 class="text-center mt-2 font-weight-bold">Base Scenario Contributions</h6>
+              <div class="card-body chartsvg" id="incrmtblowChartBase">
+
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+
+      </div>
+      <div class="tab-pane fade" id="modalroi" role="tabpanel" aria-labelledby="modalroi-tab">
+        <div class="row margTB5">
+          <div class="col-sm-12 col-md-4 col-lg-4">
+            <div class="card contntBox">
+              <div class="card-body">
+                <p class="cntntBoxhdr">New Scenario Overall ROI</p>
+                <h4 class="cntntBoxitms" id="roinewscrnspnd">0</h4>
+              </div>
+            </div>
+
+          </div>
+          <div class="col-sm-12 col-md-4 col-lg-4">
+            <div class="card contntBox">
+              <div class="card-body">
+                <p class="cntntBoxhdr">Base Scenario Overall ROI</p>
+                <h4 class="cntntBoxitms" id="newscrnbasespnd">0</h4>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-12 col-md-4 col-lg-4">
+            <div class="card contntBox">
+              <div class="card-body">
+                <p class="cntntBoxhdr">Change In Overall ROI</p>
+
+                <h4 class="cntntBoxitms" id="roichnginspnd">0.00
+                  <i class="fa fa-arrow-up green" aria-hidden="true"></i>
+                </h4>
+                <h6 class="cntntBoxitms_suffix" id="roichnginspndprcnt">(0.00%)</h6>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-sm-12 col-md-12 col-lg-12 margTB5">
+            <div class="card">
+              <h6 class="text-center mt-2 font-weight-bold">New Scenario Contribution Chart </h6>
+              <div class="card-body chartsvg" id="roibaseChart">
+
+              </div>
+            </div>
+
+          </div>
+          <div class="col-sm-12 col-md-12 col-lg-12">
+            <div class="card">
+              <h6 class="text-center mt-2 font-weight-bold">Base Scenario Contribution Chart</h6>
+              <div class="card-body chartsvg" id="roiincrChart">
+
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!------------------Modal Boxes 1 End Here------------------>
+
+  <script type="text/javascript" src="static/js/jquery-3.2.1.min.js"></script>
+  <script type="text/javascript" src="static/js/popper.min.js"></script>
+  <script type="text/javascript" src="static/js/bootstrap-material-design.min.js"></script>
+  <script type="text/javascript" src="static/js/jquery-ui.js"></script>
+  <script type="text/javascript" src="static/js/ie10-viewport-bug-workaround.js"></script>
+  <script type="text/javascript" src="static/js/d3_v4.js"></script>
+  <script type="text/javascript" src="static/js/custmcharts.js"></script>
+  <script type="text/javascript" src="static/js/customscripts.js"></script>
+  <script type="text/javascript" src="static/js/slidecustoms.js"></script>
+  <script type="text/javascript" src="static/js/tooltipster.bundle.min.js"></script>
+  
+</body>

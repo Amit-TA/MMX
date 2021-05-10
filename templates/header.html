@@ -1,0 +1,37 @@
+<nav class="navbar navbar-expand whiteBG static-top py-0">
+
+  <a class="navbar-brand" href="/MarketMixPlanner">
+    <img src="static/images/Tiger-Analytics-logo.jpg" id="navTalogo">
+  </a>
+
+
+
+
+  
+  <div class="col text-center">
+    <a href="/MarketMixPlanner" class="appTitle"> <h2 class="font-weight-bold mb-0">Marketing Mix Planner</h2></a>
+  </div>
+ 
+
+ 
+  <ul class="navbar-nav ml-auto">
+
+    <li class="nav-item dropdown no-arrow">
+      <a class="nav-link dropdown-toggle darkcolor" href="#" id="userDropdown" role="button" data-toggle="dropdown"
+        aria-haspopup="true" aria-expanded="false">
+        <i class="fas fa-user-circle fa-2x"></i>
+      </a>
+      <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
+        {% if g.user.userType() == 'Administrator'%}
+        <a class="dropdown-item" href="register">Register New User</a>
+        <a class="dropdown-item" href="manageusers">Manage Users</a>
+        {% endif %}
+        <a class="dropdown-item" href="logout">
+          <i class="fas fa-sign-out-alt"></i>
+          &nbsp; Logout
+        </a>
+      </div>
+    </li>
+  </ul>
+
+</nav>

@@ -1,0 +1,737 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    {% include 'metabar.html' %}
+
+  <link rel="stylesheet" href="static/css/bootstrap-material-design.css">
+  <link rel="stylesheet" href="static/css/fontawesome-free/css/all.min.css">
+  <link rel="stylesheet" href="static/css/animate.css">
+  <link rel="stylesheet" href="static/css/jquery-ui.css">
+  <link rel="stylesheet" href="static/css/custom.css">
+  <link rel="stylesheet" href="static/css/revampMMX.css">
+  <link rel="stylesheet" href="static/css/chartstyles.css">
+
+</head>
+
+<body id="page-top">
+  
+    {% include 'header.html' %}
+
+  <div id="wrapper">
+
+    <!-- <div class="sidebarHandle animated fadeInLeft">
+      <i class="fas fa-angle-right fa-2x handleArrowright"></i>
+      <i class="fas fa-angle-left fa-2x handleArrowleft"></i>
+    </div> -->
+    <div class="sidebarhandleinside animated bounceIn">
+      <i class="fas fa-angle-right fa-2x insidehandleArrowright"></i>
+    </div>
+
+    <ul class="sidebar navbar-nav toggled">
+      <li class="nav-item">
+        <a class="nav-link" href="/MarketMixPlanner">
+          <i class="fas fa-home"></i>
+          <span class="">Dashboard</span>
+        </a>
+      </li>
+      <li class="nav-item active">
+        <a class="nav-link" href="hist">
+          <i class="fas fa-align-left fa-rotate-270"></i>
+          <span class="">Historical Performance </span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="scene">
+          <i class="fas fa-search"></i>
+          <span>Scenario Planner</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="compare">
+          <i class="fas fa-map-signs"></i>
+          <span>Scenario Comparison</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="optimize">
+          <i class="fas fa-sliders-h fa-rotate-90"></i>
+          <span>Mix Optimization</span></a>
+      </li>
+      <!-- <div class="dropdown-divider"></div>
+      <li class="nav-item">
+        <a class="nav-link" href="">
+          <i class="fas fa-cog"></i>
+          <span>Settings</span></a>
+      </li> -->
+    </ul>
+
+    <div id="content-wrapper">
+
+      <div class="container-fluid">
+
+
+        <!-- <div class="row">
+          <div class="col-xl-12 col-sm-12">
+            <h4 class="text-right darkcolor mb-1 font-weight-bold">Historical Performance</h4>
+          </div>
+        </div> -->
+
+        <div class="row">
+          <div class="col-12 col-xl-12 col-md-12 col-sm-12 col-lg-12">
+            <div class="card">
+              <div class="card-body px-0 py-0">
+                <table class="table table-responsive conttbl">
+
+                  <thead class="histTblheader">
+                    <tr>
+                      <th scope="col">&nbsp;</th>
+                      <th scope="col">&nbsp;</th>
+                      <th scope="col" class="tblmainhdr">Display</th>
+                      <th scope="col" class="tblmainhdr">Paid
+                        <br>Search</th>
+                      <th scope="col" class="tblmainhdr">External
+                        <br>Email</th>
+                      <th scope="col" class="tblmainhdr">Email</th>
+                      <th scope="col" class="tblmainhdr">Trade
+                        <br>Coop</th>
+                      <th scope="col" class="tblmainhdr">Trade
+                        <br>DMA Other</th>
+                      <th scope="col" class="tblmainhdr">TV</th>
+                      <th scope="col" class="tblmainhdr">DM</th>
+                      <th scope="col" class="tblmainhdr">Magazine</th>
+                      <th scope="col" class="tblmainhdr">Print</th>
+                      <th scope="col" class="tblmainhdr">Radio</th>
+                      <th scope="col" class="tblmainhdr">PR</th>
+
+
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td class="tblyearbox">2015</td>
+                      <td scope="row" class="tblspndrevenuebox">
+                        <table class="table table-responsive conttbl">
+
+                          <tbody>
+                            <tr>
+                              <td class="spndtxt px-0">Spend<sup>&nbsp;*</sup>
+                                <!-- <span class="ltleamnt"> (in'000)</span> -->
+                              </td>
+
+                            </tr>
+                            <tr>
+                              <td class="spndtxt px-0">Sales</td>
+
+                            </tr>
+
+                          </tbody>
+                        </table>
+                      </td>
+                      <td class="tblspndrevenuebox">
+                        <table class="table table-responsive conttbl">
+                          <tbody>
+                            <tr>
+                              <td class="spndtxt2">${{ "{:,}".format((histData[0][0].Y2015 / 1000) |round | int )}}</td>
+                            </tr>
+                            <tr>
+                              <td class="spndtxt2">{{ "{:,}".format((histData[1][0].Y2015) |round| int )}}</td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </td>
+                      <td class="tblspndrevenuebox">
+                        <table class="table table-responsive conttbl">
+                          <tbody>
+                            <tr>
+                              <td class="spndtxt2">${{ "{:,}".format((histData[0][5].Y2015 / 1000) |round | int )}}</td>
+                            </tr>
+                            <tr>
+                              <td class="spndtxt2">{{ "{:,}".format((histData[1][6].Y2015) |round | int )}}</td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </td>
+                      <td class="tblspndrevenuebox">
+                        <table class="table table-responsive conttbl">
+                          <tbody>
+                            <tr>
+                              <td class="spndtxt2">${{ "{:,}".format((histData[0][3].Y2015 / 1000) |round | int )}}</td>
+                            </tr>
+                            <tr>
+                              <td class="spndtxt2">{{ "{:,}".format((histData[1][3].Y2015) |round | int )}}</td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </td>
+                      <td class="tblspndrevenuebox">
+                        <table class="table table-responsive conttbl">
+                          <tbody>
+                            <tr>
+                              <td class="spndtxt2">${{ "{:,}".format((histData[0][2].Y2015 / 1000) |round | int )}}</td>
+                            </tr>
+                            <tr>
+                              <td class="spndtxt2">{{ "{:,}".format((histData[1][2].Y2015) |round | int )}}</td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </td>
+                      <td class="tblspndrevenuebox">
+                        <table class="table table-responsive conttbl">
+                          <tbody>
+                            <tr>
+                              <td class="spndtxt2">${{ "{:,}".format((histData[0][9].Y2015 / 1000) |round | int )}}</td>
+                            </tr>
+                            <tr>
+                              <td class="spndtxt2">{{ "{:,}".format((histData[1][10].Y2015) |round | int )}}</td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </td>
+                      <td class="tblspndrevenuebox">
+                        <table class="table table-responsive conttbl">
+                          <tbody>
+                            <tr>
+                              <td class="spndtxt2">${{ "{:,}".format((histData[0][10].Y2015 / 1000) |round | int )}}</td>
+                            </tr>
+                            <tr>
+                              <td class="spndtxt2">{{ "{:,}".format((histData[1][11].Y2015) |round | int )}}</td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </td>
+                      <td class="tblspndrevenuebox">
+                        <table class="table table-responsive conttbl">
+                          <tbody>
+                            <tr>
+                              <td class="spndtxt2">${{ "{:,}".format((histData[0][11].Y2015 / 1000) |round | int )}}</td>
+                            </tr>
+                            <tr>
+                              <td class="spndtxt2">{{ "{:,}".format((histData[1][12].Y2015) |round | int )}}</td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </td>
+                      <td class="tblspndrevenuebox">
+                        <table class="table table-responsive conttbl">
+                          <tbody>
+                            <tr>
+                              <td class="spndtxt2">${{ "{:,}".format((histData[0][1].Y2015 / 1000) |round | int )}}</td>
+                            </tr>
+                            <tr>
+                              <td class="spndtxt2">{{ "{:,}".format((histData[1][1].Y2015) |round | int )}}</td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </td>
+                      <td class="tblspndrevenuebox">
+                        <table class="table table-responsive conttbl">
+                          <tbody>
+                            <tr>
+                              <td class="spndtxt2">${{ "{:,}".format((histData[0][4].Y2015 / 1000) |round | int )}}</td>
+                            </tr>
+                            <tr>
+                              <td class="spndtxt2">{{ "{:,}".format((histData[1][4].Y2015) |round | int )}}</td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </td>
+                      <td class="tblspndrevenuebox">
+                        <table class="table table-responsive conttbl">
+                          <tbody>
+                            <tr>
+                              <td class="spndtxt2">${{ "{:,}".format((histData[0][7].Y2015 / 1000) |round | int )}}</td>
+                            </tr>
+                            <tr>
+                              <td class="spndtxt2">{{ "{:,}".format((histData[1][8].Y2015) |round | int )}}</td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </td>
+                      <td class="tblspndrevenuebox">
+                        <table class="table table-responsive conttbl">
+                          <tbody>
+                            <tr>
+                              <td class="spndtxt2">${{ "{:,}".format((histData[0][8].Y2015 / 1000) |round | int )}}</td>
+                            </tr>
+                            <tr>
+                              <td class="spndtxt2">{{ "{:,}".format((histData[1][9].Y2015) |round | int )}}</td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </td>
+                      <td class="tblspndrevenuebox">
+                        <table class="table table-responsive conttbl">
+                          <tbody>
+                            <tr>
+                              <td class="spndtxt2">${{ "{:,}".format((histData[0][6].Y2015 / 1000) |round | int )}}</td>
+                            </tr>
+                            <tr>
+                              <td class="spndtxt2">{{ "{:,}".format((histData[1][7].Y2015) |round | int )}}</td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td class="tblyearbox">2016</td>
+                      <td scope="row" class="tblspndrevenuebox">
+                        <table class="table table-responsive conttbl">
+
+                          <tbody>
+                            <tr>
+                              <td class="spndtxt px-0">Spend<sup>&nbsp;*</sup>
+                                <!-- <span class="ltleamnt"> (in'000)</span> -->
+                              </td>
+
+                            </tr>
+                            <tr>
+                              <td class="spndtxt px-0">Sales</td>
+
+                            </tr>
+
+                          </tbody>
+                        </table>
+                      </td>
+                      <td class="tblspndrevenuebox">
+                        <table class="table table-responsive conttbl">
+                          <tbody>
+                            <tr>
+                              <td class="spndtxt2">${{ "{:,}".format((histData[0][0].Y2016 / 1000) |round | int )}}</td>
+                            </tr>
+                            <tr>
+                              <td class="spndtxt2">{{ "{:,}".format((histData[1][0].Y2016) |round| int )}}</td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </td>
+                      <td class="tblspndrevenuebox">
+                        <table class="table table-responsive conttbl">
+                          <tbody>
+                            <tr>
+                              <td class="spndtxt2">${{ "{:,}".format((histData[0][5].Y2016 / 1000) |round | int )}}</td>
+                            </tr>
+                            <tr>
+                              <td class="spndtxt2">{{ "{:,}".format((histData[1][6].Y2016) |round | int )}}</td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </td>
+                      <td class="tblspndrevenuebox">
+                        <table class="table table-responsive conttbl">
+                          <tbody>
+                            <tr>
+                              <td class="spndtxt2">${{ "{:,}".format((histData[0][3].Y2016 / 1000) |round | int )}}</td>
+                            </tr>
+                            <tr>
+                              <td class="spndtxt2">{{ "{:,}".format((histData[1][3].Y2016) |round | int )}}</td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </td>
+                      <td class="tblspndrevenuebox">
+                        <table class="table table-responsive conttbl">
+                          <tbody>
+                            <tr>
+                              <td class="spndtxt2">${{ "{:,}".format((histData[0][2].Y2016 / 1000) |round | int )}}</td>
+                            </tr>
+                            <tr>
+                              <td class="spndtxt2">{{ "{:,}".format((histData[1][2].Y2016) |round | int )}}</td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </td>
+                      <td class="tblspndrevenuebox">
+                        <table class="table table-responsive conttbl">
+                          <tbody>
+                            <tr>
+                              <td class="spndtxt2">${{ "{:,}".format((histData[0][9].Y2016 / 1000) |round | int )}}</td>
+                            </tr>
+                            <tr>
+                              <td class="spndtxt2">{{ "{:,}".format((histData[1][10].Y2016) |round | int )}}</td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </td>
+                      <td class="tblspndrevenuebox">
+                        <table class="table table-responsive conttbl">
+                          <tbody>
+                            <tr>
+                              <td class="spndtxt2">${{ "{:,}".format((histData[0][10].Y2016 / 1000) |round | int )}}</td>
+                            </tr>
+                            <tr>
+                              <td class="spndtxt2">{{ "{:,}".format((histData[1][11].Y2016) |round | int )}}</td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </td>
+                      <td class="tblspndrevenuebox">
+                        <table class="table table-responsive conttbl">
+                          <tbody>
+                            <tr>
+                              <td class="spndtxt2">${{ "{:,}".format((histData[0][11].Y2016 / 1000) |round | int )}}</td>
+                            </tr>
+                            <tr>
+                              <td class="spndtxt2">{{ "{:,}".format((histData[1][12].Y2016) |round | int )}}</td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </td>
+                      <td class="tblspndrevenuebox">
+                        <table class="table table-responsive conttbl">
+                          <tbody>
+                            <tr>
+                              <td class="spndtxt2">${{ "{:,}".format((histData[0][1].Y2016 / 1000) |round | int )}}</td>
+                            </tr>
+                            <tr>
+                              <td class="spndtxt2">{{ "{:,}".format((histData[1][1].Y2016) |round | int )}}</td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </td>
+                      <td class="tblspndrevenuebox">
+                        <table class="table table-responsive conttbl">
+                          <tbody>
+                            <tr>
+                              <td class="spndtxt2">${{ "{:,}".format((histData[0][4].Y2016 / 1000) |round | int )}}</td>
+                            </tr>
+                            <tr>
+                              <td class="spndtxt2">{{ "{:,}".format((histData[1][4].Y2016) |round | int )}}</td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </td>
+                      <td class="tblspndrevenuebox">
+                        <table class="table table-responsive conttbl">
+                          <tbody>
+                            <tr>
+                              <td class="spndtxt2">${{ "{:,}".format((histData[0][7].Y2016 / 1000) |round | int )}}</td>
+                            </tr>
+                            <tr>
+                              <td class="spndtxt2">{{ "{:,}".format((histData[1][8].Y2016) |round | int )}}</td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </td>
+                      <td class="tblspndrevenuebox">
+                        <table class="table table-responsive conttbl">
+                          <tbody>
+                            <tr>
+                              <td class="spndtxt2">${{ "{:,}".format((histData[0][8].Y2016 / 1000) |round | int )}}</td>
+                            </tr>
+                            <tr>
+                              <td class="spndtxt2">{{ "{:,}".format((histData[1][9].Y2016) |round | int )}}</td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </td>
+                      <td class="tblspndrevenuebox">
+                        <table class="table table-responsive conttbl">
+                          <tbody>
+                            <tr>
+                              <td class="spndtxt2">${{ "{:,}".format((histData[0][6].Y2016 / 1000) |round | int )}}</td>
+                            </tr>
+                            <tr>
+                              <td class="spndtxt2">{{ "{:,}".format((histData[1][7].Y2016) |round | int )}}</td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td class="tblyearbox">2017</td>
+                      <td scope="row" class="tblspndrevenuebox">
+                        <table class="table table-responsive conttbl">
+
+                          <tbody>
+                            <tr>
+                              <td class="spndtxt px-0">Spend<sup>&nbsp;*</sup>
+                                <!-- <span class="ltleamnt"> (in'000)</span> -->
+                              </td>
+
+                            </tr>
+                            <tr>
+                              <td class="spndtxt px-0">Sales</td>
+
+                            </tr>
+
+                          </tbody>
+                        </table>
+                      </td>
+                      <td class="tblspndrevenuebox">
+                        <table class="table table-responsive conttbl">
+                          <tbody>
+                            <tr>
+                              <td class="spndtxt2">${{ "{:,}".format((histData[0][0].Y2017 / 1000) |round | int )}}</td>
+                            </tr>
+                            <tr>
+                              <td class="spndtxt2">{{ "{:,}".format((histData[1][0].Y2017) |round| int )}}</td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </td>
+                      <td class="tblspndrevenuebox">
+                        <table class="table table-responsive conttbl">
+                          <tbody>
+                            <tr>
+                              <td class="spndtxt2">${{ "{:,}".format((histData[0][5].Y2017 / 1000) |round | int )}}</td>
+                            </tr>
+                            <tr>
+                              <td class="spndtxt2">{{ "{:,}".format((histData[1][6].Y2017) |round | int )}}</td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </td>
+                      <td class="tblspndrevenuebox">
+                        <table class="table table-responsive conttbl">
+                          <tbody>
+                            <tr>
+                              <td class="spndtxt2">${{ "{:,}".format((histData[0][3].Y2017 / 1000) |round | int )}}</td>
+                            </tr>
+                            <tr>
+                              <td class="spndtxt2">{{ "{:,}".format((histData[1][3].Y2017) |round | int )}}</td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </td>
+                      <td class="tblspndrevenuebox">
+                        <table class="table table-responsive conttbl">
+                          <tbody>
+                            <tr>
+                              <td class="spndtxt2">${{ "{:,}".format((histData[0][2].Y2017 / 1000) |round | int )}}</td>
+                            </tr>
+                            <tr>
+                              <td class="spndtxt2">{{ "{:,}".format((histData[1][2].Y2017) |round | int )}}</td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </td>
+                      <td class="tblspndrevenuebox">
+                        <table class="table table-responsive conttbl">
+                          <tbody>
+                            <tr>
+                              <td class="spndtxt2">${{ "{:,}".format((histData[0][9].Y2017 / 1000) |round | int )}}</td>
+                            </tr>
+                            <tr>
+                              <td class="spndtxt2">{{ "{:,}".format((histData[1][10].Y2017) |round | int )}}</td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </td>
+                      <td class="tblspndrevenuebox">
+                        <table class="table table-responsive conttbl">
+                          <tbody>
+                            <tr>
+                              <td class="spndtxt2">${{ "{:,}".format((histData[0][10].Y2017 / 1000) |round | int )}}</td>
+                            </tr>
+                            <tr>
+                              <td class="spndtxt2">{{ "{:,}".format((histData[1][11].Y2017) |round | int )}}</td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </td>
+                      <td class="tblspndrevenuebox">
+                        <table class="table table-responsive conttbl">
+                          <tbody>
+                            <tr>
+                              <td class="spndtxt2">${{ "{:,}".format((histData[0][11].Y2017 / 1000) |round | int )}}</td>
+                            </tr>
+                            <tr>
+                              <td class="spndtxt2">{{ "{:,}".format((histData[1][12].Y2017) |round | int )}}</td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </td>
+                      <td class="tblspndrevenuebox">
+                        <table class="table table-responsive conttbl">
+                          <tbody>
+                            <tr>
+                              <td class="spndtxt2">${{ "{:,}".format((histData[0][1].Y2017 / 1000) |round | int )}}</td>
+                            </tr>
+                            <tr>
+                              <td class="spndtxt2">{{ "{:,}".format((histData[1][1].Y2017) |round | int )}}</td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </td>
+                      <td class="tblspndrevenuebox">
+                        <table class="table table-responsive conttbl">
+                          <tbody>
+                            <tr>
+                              <td class="spndtxt2">${{ "{:,}".format((histData[0][4].Y2017 / 1000) |round | int )}}</td>
+                            </tr>
+                            <tr>
+                              <td class="spndtxt2">{{ "{:,}".format((histData[1][4].Y2017) |round | int )}}</td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </td>
+                      <td class="tblspndrevenuebox">
+                        <table class="table table-responsive conttbl">
+                          <tbody>
+                            <tr>
+                              <td class="spndtxt2">${{ "{:,}".format((histData[0][7].Y2017 / 1000) |round | int )}}</td>
+                            </tr>
+                            <tr>
+                              <td class="spndtxt2">{{ "{:,}".format((histData[1][8].Y2017) |round | int )}}</td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </td>
+                      <td class="tblspndrevenuebox">
+                        <table class="table table-responsive conttbl">
+                          <tbody>
+                            <tr>
+                              <td class="spndtxt2">${{ "{:,}".format((histData[0][8].Y2017 / 1000) |round | int )}}</td>
+                            </tr>
+                            <tr>
+                              <td class="spndtxt2">{{ "{:,}".format((histData[1][9].Y2017) |round | int )}}</td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </td>
+                      <td class="tblspndrevenuebox">
+                        <table class="table table-responsive conttbl">
+                          <tbody>
+                            <tr>
+                              <td class="spndtxt2">${{ "{:,}".format((histData[0][6].Y2017 / 1000) |round | int )}}</td>
+                            </tr>
+                            <tr>
+                              <td class="spndtxt2">{{ "{:,}".format((histData[1][7].Y2017) |round | int )}}</td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+                <p class="pl-2 font-weight-bold mb-0">Note:&nbsp;<sup>*</sup> in '000</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="row my-3">
+          <div class="col-12 col-md-12 col-sm-12 col-lg-6">
+            <div class="card">
+              <div class="card-header text-center graphBooxhdr">
+                <h5 class="m-0">Marketing Spend</h5>
+              </div>
+              <div class="card-body chartsvg" id="histchartBox">
+
+              </div>
+
+            </div>
+          </div>
+          <div class="col-12 col-md-12 col-sm-12 col-lg-6">
+            <div class="card">
+              <div class="card-header text-center graphBooxhdr">
+                <h5 class="m-0">Total Sales</h5>
+              </div>
+              <div class="card-body chartsvg" id="revbookchartBox">
+
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+        <div class="row my-3">
+          <div class="col-12 col-md-12 col-sm-12 col-lg-12">
+            <div class="card">
+              <div class="card-header text-center graphBooxhdr">
+                  <h5 class="m-0">Sales Contribution</h5>
+              </div>
+              <div class="card-body">
+                  <div class="row">
+                      <div class="col-12 col-md-4 col-sm-12 col-lg-4">
+                          <div class="card">
+                              <div class="card-header text-center graphBooxhdr">
+                                  <h6 class="m-0">2015</h6>
+                              </div>
+                              <div class="card-body chartsvg" id="optim_2015_pie"></div>
+                          </div>
+                      </div>
+                      <div class="col-12 col-md-4 col-sm-12 col-lg-4">
+                          <div class="card">
+                              <div class="card-header text-center graphBooxhdr">
+                                  <h6 class="m-0">2016</h6>
+                              </div>
+                              <div class="card-body chartsvg" id="optim_2016_pie"></div>
+                          </div>
+  
+                      </div>
+                      <div class="col-12 col-md-4 col-sm-12 col-lg-4">
+                          <div class="card">
+                              <div class="card-header text-center graphBooxhdr">
+                                  <h6 class="m-0">2017</h6>
+                              </div>
+                              <div class="card-body chartsvg" id="optim_2017_pie"></div>
+                          </div>
+  
+                      </div>
+  
+                      <div class="col-12 col-md-12 col-sm-12 col-lg-12 mt-2">
+                          <div class="card">
+                              <div class="card-header text-center graphBooxhdr">
+                                  <h5 class="m-0">Sales Contribution by Marketing Activities</h5>
+                              </div>
+                              <div class="card-body chartsvg px-0 py-0" id="optimhistbaseChart"></div>
+                          </div>
+  
+                      </div>
+  
+                  </div>
+              </div>
+          </div>
+          </div>
+        </div>
+
+        <div class="row my-3">
+          <div class="col-12 col-md-12 col-sm-12 col-lg-12">
+              <button type="button" onclick="window.location.href='scene'" class="btn btn-raised btn-celebrity float-right">Explore Scenarios</button>
+          </div>
+      </div>
+      </div>
+    </div>
+  </div>
+
+  <a class="scroll-to-top rounded" href="#page-top">
+    <i class="fas fa-angle-up"></i>
+  </a>
+
+
+  <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+          <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">×</span>
+          </button>
+        </div>
+        <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
+        <div class="modal-footer">
+          <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+          <a class="btn btn-primary" href="login.html">Logout</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <script type="text/javascript" src="static/js/jquery-3.2.1.min.js"></script>
+  <script type="text/javascript" src="static/js/popper.min.js"></script>
+  <script type="text/javascript" src="static/js/bootstrap-material-design.min.js"></script>
+  <script type="text/javascript" src="static/js/jquery-ui.js"></script>
+  <script type="text/javascript" src="static/js/ie10-viewport-bug-workaround.js"></script>
+  <script type="text/javascript" src="static/js/revampMMX.js"></script>
+  <script type="text/javascript" src="static/js/d3_v4.js"></script>
+  <script type="text/javascript" src="static/js/customscripts.js"></script>
+  <script type="text/javascript" src="static/js/slidecustoms.js"></script>
+  <script type="text/javascript" src="static/js/custmcharts.js"></script>
+
+
+
+
+</body>
+
+</html>

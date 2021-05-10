@@ -1,0 +1,27 @@
+{
+	"2015": [{
+		"BookingCat": "Incremental, 43.1%",
+		"Value": 98441
+	}, {
+		"BookingCat": "Base+Price, 56.9%",
+		"Value": 158108.2296142847
+	}],
+
+	"2016": [{
+		"BookingCat": "Incremental, 40.7%",
+		"Value": 108835.10687308726
+	}, {
+		"BookingCat": "Base+Price, 59.3%",
+		"Value": 158900.52301334
+	}],
+
+
+	"2017": [{
+		"BookingCat": "Incremental, 37.1%",
+		"Value": 119517.28345566987
+	}, {
+		"BookingCat": "Base+Price, 62.9%",
+		"Value": 202783.32245719648
+	}]
+
+}

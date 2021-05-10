@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  {% include 'metabar.html' %}
+
+  <link rel="stylesheet" href="static/css/bootstrap-material-design.css">
+  <link rel="stylesheet" href="static/css/fontawesome-free/css/all.min.css">
+  <link rel="stylesheet" href="static/css/bootstrap-material-datetimepicker.css">
+  <link rel="stylesheet" href="static/css/DataTables-1.10.16/css/dataTables.bootstrap.min.css">
+  <link rel="stylesheet" href="static/css/revampMMX.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+
+
+
+
+</head>
+
+<body id="page-top">
+
+  {% include 'header.html' %}
+
+
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-sm-12 col-md-4 col-lg-4">
+
+      </div>
+      <div class="col-sm-12 col-md-4 col-lg-4">
+
+        <div class="card credentialBox">
+          <h4 class="card-title text-center text-uppercase my-2">Register</h4>
+          <div class="card-body">
+
+
+            <form action="register" method="POST" class="form-horizontal" id="rgfrm">
+              <div class="form-group">
+
+                <div class="cols-sm-10">
+                  <div class="input-group">
+                    <span class="input-group-addon">
+                      <i class="fa fa-user fa-lg" aria-hidden="true"></i>
+                    </span>
+                    <input type="text" class="form-control frmfld" name="username" id="username" placeholder="Enter Username" />
+                  </div>
+                </div>
+              </div>
+
+              <div class="form-group">
+
+                <div class="cols-sm-10">
+                  <div class="input-group">
+                    <span class="input-group-addon">
+                      <i class="fa fa-lock fa-lg" aria-hidden="true"></i>
+                    </span>
+                    <input type="password" class="form-control frmfld" name="password" id="password" placeholder="Enter Password" />
+                  </div>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <div class="cols-sm-10">
+                  <div class="input-group">
+                    <span class="input-group-addon">
+                      <i class="fa fa-lock fa-lg" aria-hidden="true"></i>
+                    </span>
+                    <input type="text" class="form-control frmfld" name="confirmpassword" id="confirmpassword"
+                      placeholder="Confirm Password" />
+                  </div>
+                </div>
+              </div>
+
+
+              <div class="form-group">
+
+                <div class="row  input-group mx-5">
+                  <div class="col-xl-12 col-md-12 col-sm-12">
+                    <label>
+                      <input id="Administrator" type="radio" name="usertype" value="Administrator" class=" frmrdiofld radiofield">
+                      <span class="custom-control-indicator"></span>
+                      <span class="custom-control-description">Administrator</span>
+                    </label>
+                  </div>
+                  <div class="col-xl-12 col-md-12 col-sm-12">
+                    <label>
+                      <input id="Internal" type="radio" name="usertype" value="Internal" class=" frmrdiofld radiofield"
+                        checked>
+                      <span class="custom-control-indicator"></span>
+                      <span class="custom-control-description">Internal</span>
+                    </label>
+                  </div>
+                  <div class="col-xl-12 col-md-12 col-sm-12">
+                    <label>
+                      <input id="External" type="radio" name="usertype" value="External" class=" frmrdiofld radiofield">
+                      <span class="custom-control-indicator"></span>
+                      <span class="custom-control-description">External</span>
+                    </label>
+                  </div>
+                </div>
+
+
+
+              </div>
+
+              <div class="form-group" id="ExpiryDateOuterDiv">
+
+                <div class="input-group date" data-provide="datepicker" id="expirydate">
+                  <div class="input-group-addon">
+                    <i class="fas fa-calendar-alt" aria-hidden="true"></i>
+                  </div>
+                  <input type="text" class="form-control" name="expirydateip" id="expirydateip">
+                </div>
+              </div>
+
+              <div class="text-center">
+                <button id="register" type="button" class="btn btn-raised btn-celebrity btn-block login-button">Register</button>
+                <button id="registerReset" type="reset" class="btn btn-raised btn-celebrity btn-block">Reset</button>
+              </div>
+            </form>
+
+            <div id="FormErrTag" style="padding-left: 15px; text-align: center;"></div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-12 col-md-4 col-lg-4">
+
+      </div>
+    </div>
+  </div>
+
+
+
+
+
+
+
+
+  <script type="text/javascript" src="static/js/jquery-3.2.1.min.js"></script>
+  <script type="text/javascript" src="static/js/popper.min.js"></script>
+  <script type="text/javascript" src="static/js/bootstrap-material-design.min.js"></script>
+  <script type="text/javascript" src="static/js/ie10-viewport-bug-workaround.js"></script>
+  <script type="text/javascript" src="static/js/moment.js"></script>
+  <script type="text/javascript" src="static/js/bootstrap-material-datetimepicker.js"></script>
+  <script type="text/javascript" src="static/js/jquery.dataTables.min.js"></script>
+  <script type="text/javascript" src="static/js/dataTables.bootstrap4.min.js"></script>
+  <script type="text/javascript" src="static/js/Manageusers.js"></script>
+
+
+</body>
+
+</html>

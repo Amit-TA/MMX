@@ -1,0 +1,808 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    {% include 'metabar.html' %}
+
+  <link rel="stylesheet" href="static/css/bootstrap-material-design.css">
+  <link rel="stylesheet" href="static/css/fontawesome-free/css/all.min.css">
+  <link rel="stylesheet" href="static/css/animate.css">
+  <link rel="stylesheet" href="static/css/jquery-ui.css">
+  <link rel="stylesheet" href="static/css/custom.css">
+  <link rel="stylesheet" href="static/css/revampMMX.css">
+  <link rel="stylesheet" href="static/css/tooltipster.main.css" />
+  <link rel="stylesheet" href="static/css/chartstyles.css">
+  <link rel="stylesheet" href="static/css/jquery-ui-slider-pips.css" />
+
+</head>
+
+<body id="page-top">
+  <div id="pageloaddiv" style="display:none">
+    <div class="spinner spinner-4">
+    </div>
+  </div>
+
+  {% include 'header.html' %}
+
+
+
+  <div id="wrapper">
+
+    <!-- <div class="sidebarHandle animated fadeInLeft">
+      <i class="fas fa-angle-right fa-2x handleArrowright"></i>
+      <i class="fas fa-angle-left fa-2x handleArrowleft"></i>
+    </div>
+    <div class="sidebarhandleinside animated bounceIn">
+      <i class="fas fa-angle-right fa-2x insidehandleArrowright"></i>
+    </div> -->
+
+    <ul class="sidebar navbar-nav toggled">
+      <li class="nav-item">
+        <a class="nav-link" href="/MarketMixPlanner">
+          <i class="fas fa-home"></i>
+          <span class="">Dashboard</span>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="hist">
+          <i class="fas fa-align-left fa-rotate-270"></i>
+          <span class="">Historical Performance </span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="scene">
+          <i class="fas fa-search"></i>
+          <span>Scenario Planner</span></a>
+      </li>
+      <li class="nav-item active">
+        <a class="nav-link" href="compare">
+          <i class="fas fa-map-signs"></i>
+          <span>Scenario Comparison</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="optimize">
+          <i class="fas fa-sliders-h fa-rotate-90"></i>
+          <span>Mix Optimization</span></a>
+      </li>
+      <!-- <div class="dropdown-divider"></div>
+      <li class="nav-item">
+        <a class="nav-link" href="">
+          <i class="fas fa-cog"></i>
+          <span>Settings</span></a>
+      </li> -->
+    </ul>
+
+    <div id="content-wrapper">
+      <div class="container-fluid">
+
+        <!-- <div class="row">
+          <div class="col-xl-12 col-sm-12">
+            <h4 class="text-right darkcolor mb-1 font-weight-bold">Scenario Comparison</h4>
+          </div>
+        </div> -->
+        <div class="row">
+          <div class="col-12 col-md-12 col-sm-12 col-lg-12">
+            <div class="card pdfrsltbox_rs" id="pdfBoxrs">
+              <div class="card-header scnariocnthdrBox">
+                <div class="scnarcompmainhdr">
+                  <h6 class="font-weight-bold m-0">Scenario Setup</h6>
+                </div>
+                <div class="scnarcompainhdrrslts">
+                  <div class="float-left">
+                    <h6 class="font-weight-bold m-0">Scenario Comparison Results</h6>
+                  </div>
+                  <div class="float-right">
+                    <a class="btn dropdown-toggle exprtbtn py-0 my-0" role="button" data-toggle="dropdown" id="extbtn_rs"
+                      onclick="pdfFromHTML(this.id)">Export to PDF
+                      <i class="fa fa-download" aria-hidden="true"></i>
+                    </a>
+
+                  </div>
+
+                </div>
+
+              </div>
+              <!---------------------         Scenario Input Box Starts ------------------------------------------------>
+              <div class="card-body px-0 pt-1 pb-0" id="scnrcompinputBox">
+
+                <div id="scenariocompInputContainer" class="row mx-4"></div>
+
+                <div id="scenariovalueContainer" class="row  my-4  mx-4">
+                  <div class="col-md-2 col-lg-2 p-0">
+                    <div class="card contntBox">
+                      <div class="card-body">
+                        <p class="cntntBoxscnrhdr text-right">Base Spend</p>
+                        <h4 id="comparebasespendvalue" class="cntntBoxitms text-right"></h4>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div id="scenariobarsContainer" class="row  my-4 margLR5"></div>
+
+                <div class="row">
+                  <div class="col-md-6 col-lg-6">
+                    <div class="float-left ml-4">
+                      <i class="fa fa-square grey" aria-hidden="true"></i> Base Scenario
+                      <i class="fa fa-info-circle" aria-hidden="true" id="infotip" title="Based on 2016 actual spend"></i>
+                      <i class="fa fa-square orange" aria-hidden="true"></i> New Scenario
+                    </div>
+                  </div>
+                  <div class="col-md-2 col-lg-2 p-0"></div>
+                  <div class="col-md-4 col-lg-4 no-gutters">
+                    <span class="decrval"></span>
+                    <span class="incrval"></span>
+                  </div>
+
+                </div>
+              </div>
+              <!---------------------         Scenario compare Input Box Ends ------------------------------------------------>
+
+              <div class="card-body px-0 pt-1" id="scnrcomprsltsBox">
+
+                <div class="row margLR5" id="compscnrboxOne">
+                  <div class="col col-sm-12 col-md-2 col col-lg-2 p-0">
+                    <div class="card contntBox">
+                      <div class="card-body">
+                        <p class="cntntBoxscnrhdr text-right">Base Spend</p>
+                        <h4 id="compbasespend" class="cntntBoxitms text-right ">$0</h4>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="row margLR5 my-4" id="compscnrboxTwo">
+                  <div class="col col-sm-12 col-md-2 col col-lg-2 p-0">
+                    <div class="card contntBox">
+                      <div class="card-body">
+                        <p class="cntntBoxscnrhdr text-right">Base Sales</p>
+                        <h4 id="compbasebooking" class="cntntBoxitms text-right">0</h4>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="row margLR5 my-4" id="compscnrboxROI">
+                  <div class="col col-sm-12 col-md-2 col col-lg-2 p-0">
+                    <div class="card contntBox">
+                      <div class="card-body">
+                        <p class="cntntBoxscnrhdr text-right">Base ROI
+                          <i class="fa fa-info-circle" aria-hidden="true" id="baseroi_infotip" title="ROI is  calculated as the Incremental revenue for every dollar spend  on marketing"></i>
+                        </p>
+                        <h4 id="compbaseROI" class="cntntBoxitms text-right">0</h4>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="row margLR5 my-4" id="compscnrbtnboxThree">
+                  <div class="col col-sm-12 col-md-2 col col-lg-2 p-0 mx-auto text-center">
+                    <button type="button" class="btn btn-raised btn-analysis" data-toggle="modal" data-target=".scenarioModal_1"
+                      style="display: none;">Detailed Analysis</button>
+                  </div>
+
+                </div>
+
+                <!------------------Modal Boxes Start Here------------------>
+
+                <!------------------Modal Boxes 1 Start Here------------------>
+                <div class="modal fade scenarioModal_1" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
+                  aria-hidden="true">
+                  <div class="modal-dialog modal-lg" role="document">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h6 class="scnarcntmainhdr m-0">Analysis One</h6>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                          <span aria-hidden="true">
+                            <i class="fa fa-times-circle white" aria-hidden="true"></i>
+                          </span>
+                        </button>
+                      </div>
+                      <div id="modal1body" class="modal-body">
+                        <div class="card-body" id="scnrcomprsltmodalBox1">
+                          <div style="float: right;"></div>
+                          <ul class="nav nav-tabs" id="modalmyTab" role="tablist">
+                            <li class="nav-item tabtextitem">
+                              <a class="nav-link active" id="modalcontribution-tab" data-toggle="tab" href="#modalcontribution"
+                                role="tab" aria-controls="modalcontribution" aria-selected="true">Contribution</a>
+                            </li>
+                            <li class="nav-item tabtextitem">
+                              <a class="nav-link" id="modalroi-tab" data-toggle="tab" href="#modalroi" role="tab"
+                                aria-controls="modalroi" aria-selected="false">
+                                ROI </a>
+                            </li>
+
+                          </ul>
+                          <div class="tab-content" id="modalmyTabContent">
+                            <div class="tab-pane fade show active" id="modalcontribution" role="tabpanel"
+                              aria-labelledby="modalcontribution-tab">
+                              <form id="modalscnrrsltform">
+                                <div class="row my-4">
+                                  <div class="col-sm-12 col-md-4 col-lg-4">
+                                    <p>Product Group</p>
+                                    <select id="modalproductdropdown1" class="custom-select scnrrsltselct" onchange="modalfilter(this.id);">
+                                      <option selected>All</option>
+                                      <option value="1">Product 1</option>
+                                      <option value="2">Product 2</option>
+                                      <option value="3">Product 3</option>
+                                      <option value="4">Product 4</option>
+                                      <option value="5">Product 5</option>
+                                    </select>
+                                  </div>
+                                  <div class="col-sm-12 col-md-4 col-lg-4">
+                                    <p>Channel</p>
+                                    <select id="modalchanneldropdown1" class="custom-select scnrrsltselct" onchange="modalfilter(this.id);">
+                                      <option selected>All</option>
+                                      <option value="1">Consumer Outreach</option>
+                                      <option value="2">Trade-OTA</option>
+                                      <option value="3">Trade</option>
+                                      <option value="4">Web</option>
+                                    </select>
+                                  </div>
+                                  <div class="col-sm-12 col-md-4 col-lg-4">
+                                    <p>Country</p>
+                                    <select id="modalcountrydropdown1" class="custom-select scnrrsltselct" onchange="modalfilter(this.id);">
+                                      <option selected>All</option>
+                                      <option value="1">USA</option>
+                                      <option value="2">CAN</option>
+                                    </select>
+                                  </div>
+
+                                </div>
+                              </form>
+
+                              <div class="row my-4">
+                                <div class="col-sm-12 col-md-4 col-lg-4">
+                                  <div class="card contntBox">
+                                    <div class="card-body">
+                                      <p class="cntntBoxhdr">New Scenario 1 Sales</p>
+                                      <h4 class="cntntBoxitms" id="modalnewscnrbookonslct">0</h4>
+                                    </div>
+                                  </div>
+
+                                </div>
+                                <div class="col-sm-12 col-md-4 col-lg-4">
+                                  <div class="card contntBox">
+                                    <div class="card-body">
+                                      <p class="cntntBoxhdr">Base Scenario Sales</p>
+                                      <h4 class="cntntBoxitms" id="modalbasescnrbookonslct">0</h4>
+                                    </div>
+                                  </div>
+                                </div>
+                                <div class="col-sm-12 col-md-4 col-lg-4">
+                                  <div class="card contntBox">
+                                    <div class="card-body">
+                                      <p class="cntntBoxhdr">Change In Sales</p>
+
+                                      <h4 class="cntntBoxitms" id="modalchnginspndonslct">0
+                                        <i class="fa fa-arrow-up green" aria-hidden="true"></i>
+                                      </h4>
+                                      <h6 id="modalchnginspndonslctprcnt" class="cntntBoxitms_suffix">(0%)</h6>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+
+                              <div class="row my-4">
+                                <div class="col-sm-12 col-md-4 col-lg-4">
+                                  <div class="card  mb-2">
+                                    <h6 class="text-center mt-2 font-weight-bold">New Scenario 1</h6>
+                                    <div class="card-body py-2" id="modalscnrrsltpieChart"></div>
+                                  </div>
+
+                                  <div class="card">
+                                    <h6 class="text-center mt-2 font-weight-bold">Base Scenario</h6>
+                                    <div class="card-body py-2" id="modalscnrrsltpieChartBase"></div>
+                                  </div>
+
+                                </div>
+                                <div class="col-sm-12 col-md-8 col-lg-8">
+                                  <div class="card">
+                                    <h6 class="text-center mt-2 font-weight-bold">Sales Contributions</h6>
+                                    <div class="card-body chartsvg" id="modalincrmtblowChart">
+
+                                    </div>
+                                  </div>
+                                </div>
+
+                              </div>
+
+
+                            </div>
+                            <div class="tab-pane fade" id="modalroi" role="tabpanel" aria-labelledby="modalroi-tab">
+                              <div class="row my-4">
+                                <div class="col-sm-12 col-md-4 col-lg-4">
+                                  <div class="card contntBox">
+                                    <div class="card-body">
+                                      <p class="cntntBoxhdr">New Scenario 1 Overall ROI</p>
+                                      <h4 class="cntntBoxitms" id="modalnewroibox">0</h4>
+                                    </div>
+                                  </div>
+
+                                </div>
+                                <div class="col-sm-12 col-md-4 col-lg-4">
+                                  <div class="card contntBox">
+                                    <div class="card-body">
+                                      <p class="cntntBoxhdr">Base Scenario Overall ROI</p>
+                                      <h4 class="cntntBoxitms" id="modalbaseroibox">0</h4>
+                                    </div>
+                                  </div>
+                                </div>
+                                <div class="col-sm-12 col-md-4 col-lg-4">
+                                  <div class="card contntBox">
+                                    <div class="card-body">
+                                      <p class="cntntBoxhdr">Change In Overall ROI</p>
+
+                                      <h4 class="cntntBoxitms" id="modalroichangebox">0.00
+                                        <i class="fa fa-arrow-up green" aria-hidden="true"></i>
+                                      </h4>
+                                      <h6 class="cntntBoxitms_suffix" id="modalroichangepercentbox">(0.00%)</h6>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+
+                              <div class="row">
+                                <div class="col-sm-12 col-md-12 col-lg-12 my-4">
+                                  <div class="card">
+                                    <h6 class="text-center mt-2 font-weight-bold">ROI Comparision </h6>
+                                    <div class="card-body chartsvg" id="modalroibaseChart">
+
+                                    </div>
+                                  </div>
+
+                                </div>
+
+
+                              </div>
+                            </div>
+
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <!------------------Modal Boxes 1 End Here------------------>
+
+                <!------------------Modal Boxes 2 Start Here------------------>
+
+                <div class="modal fade scenarioModal_2" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
+                  aria-hidden="true">
+                  <div class="modal-dialog modal-lg" role="document">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h6 class="scnarcntmainhdr m-0">Analysis Two</h6>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                          <span aria-hidden="true">
+                            <i class="fa fa-times-circle white" aria-hidden="true"></i>
+                          </span>
+                        </button>
+                      </div>
+                      <div id="modal2body" class="modal-body">
+                        <div class="card-body" id="scnrcomprsltmodalBox2">
+
+                          <ul class="nav nav-tabs" id="modalmyTab2" role="tablist">
+                            <li class="nav-item tabtextitem">
+                              <a class="nav-link active" id="modalcontribution-tab2" data-toggle="tab" href="#modalcontribution2"
+                                role="tab" aria-controls="modalcontribution2" aria-selected="true">Contribution</a>
+                            </li>
+                            <li class="nav-item tabtextitem">
+                              <a class="nav-link" id="modalroi-tab2" data-toggle="tab" href="#modalroi2" role="tab"
+                                aria-controls="modalroi2" aria-selected="false">
+                                ROI </a>
+                            </li>
+
+                          </ul>
+                          <div class="tab-content" id="modalmyTabContent2">
+                            <div class="tab-pane fade show active" id="modalcontribution2" role="tabpanel"
+                              aria-labelledby="modalcontribution-tab2">
+                              <form id="modalscnrrsltform2">
+                                <div class="row my-4">
+                                  <div class="col-sm-12 col-md-4 col-lg-4">
+                                    <p>Product Group</p>
+                                    <select id="modalproductdropdown2" class="custom-select scnrrsltselct" onchange="modalfilter(this.id);">
+                                      <option selected>All</option>
+                                      <option value="1">Product 1</option>
+                                      <option value="2">Product 2</option>
+                                      <option value="3">Product 3</option>
+                                      <option value="4">Product 4</option>
+                                      <option value="5">Product 5</option>
+                                    </select>
+                                  </div>
+                                  <div class="col-sm-12 col-md-4 col-lg-4">
+                                    <p>Channel</p>
+                                    <select id="modalchanneldropdown2" class="custom-select scnrrsltselct" onchange="modalfilter(this.id);">
+                                      <option selected>All</option>
+                                      <option value="1">Consumer Outreach</option>
+                                      <option value="2">Trade-OTA</option>
+                                      <option value="3">Trade</option>
+                                      <option value="4">Web</option>
+                                    </select>
+                                  </div>
+                                  <div class="col-sm-12 col-md-4 col-lg-4">
+                                    <p>Country</p>
+                                    <select id="modalcountrydropdown2" class="custom-select scnrrsltselct" onchange="modalfilter(this.id);">
+                                      <option selected>All</option>
+                                      <option value="1">USA</option>
+                                      <option value="2">CAN</option>
+                                    </select>
+                                  </div>
+
+                                </div>
+                              </form>
+
+                              <div class="row my-4">
+                                <div class="col-sm-12 col-md-4 col-lg-4">
+                                  <div class="card contntBox">
+                                    <div class="card-body">
+                                      <p class="cntntBoxhdr">New Scenario 2 Sales</p>
+                                      <h4 class="cntntBoxitms" id="modalnewscnrbookonslct2">0</h4>
+                                    </div>
+                                  </div>
+
+                                </div>
+                                <div class="col-sm-12 col-md-4 col-lg-4">
+                                  <div class="card contntBox">
+                                    <div class="card-body">
+                                      <p class="cntntBoxhdr">Base Scenario Sales</p>
+                                      <h4 class="cntntBoxitms" id="modalbasescnrbookonslct2">0</h4>
+                                    </div>
+                                  </div>
+                                </div>
+                                <div class="col-sm-12 col-md-4 col-lg-4">
+                                  <div class="card contntBox">
+                                    <div class="card-body">
+                                      <p class="cntntBoxhdr">Change In Sales</p>
+
+                                      <h4 class="cntntBoxitms" id="modalchnginspndonslct2">0
+                                        <i class="fa fa-arrow-up green" aria-hidden="true"></i>
+                                      </h4>
+                                      <h6 id="modalchnginspndonslctprcnt2" class="cntntBoxitms_suffix">(0%)</h6>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+
+                              <div class="row my-4">
+                                <div class="col-sm-12 col-md-4 col-lg-4">
+                                  <div class="card  mb-2">
+                                    <h6 class="text-center mt-2 font-weight-bold">New Scenario 2</h6>
+                                    <div class="card-body py-2" id="modalscnrrsltpieChart2"></div>
+                                  </div>
+
+                                  <div class="card">
+                                    <h6 class="text-center mt-2 font-weight-bold">Base Scenario</h6>
+                                    <div class="card-body py-2" id="modalscnrrsltpieChartBase2"></div>
+                                  </div>
+
+                                </div>
+                                <div class="col-sm-12 col-md-8 col-lg-8">
+                                  <div class="card">
+                                    <h6 class="text-center mt-2 font-weight-bold">Sales Contributions</h6>
+                                    <div class="card-body chartsvg" id="modalincrmtblowChart2">
+
+                                    </div>
+                                  </div>
+                                </div>
+
+                              </div>
+
+
+                            </div>
+                            <div class="tab-pane fade" id="modalroi2" role="tabpanel" aria-labelledby="modalroi-tab2">
+                              <div class="row my-4">
+                                <div class="col-sm-12 col-md-4 col-lg-4">
+                                  <div class="card contntBox">
+                                    <div class="card-body">
+                                      <p class="cntntBoxhdr">New Scenario 2 Overall ROI</p>
+                                      <h4 class="cntntBoxitms" id="modalnewroibox2">0</h4>
+                                    </div>
+                                  </div>
+
+                                </div>
+                                <div class="col-sm-12 col-md-4 col-lg-4">
+                                  <div class="card contntBox">
+                                    <div class="card-body">
+                                      <p class="cntntBoxhdr">Base Scenario Overall ROI</p>
+                                      <h4 class="cntntBoxitms" id="modalbaseroibox2">0</h4>
+                                    </div>
+                                  </div>
+                                </div>
+                                <div class="col-sm-12 col-md-4 col-lg-4">
+                                  <div class="card contntBox">
+                                    <div class="card-body">
+                                      <p class="cntntBoxhdr">Change In Overall ROI</p>
+
+                                      <h4 class="cntntBoxitms" id="modalroichangebox2">0.00
+                                        <i class="fa fa-arrow-up green" aria-hidden="true"></i>
+                                      </h4>
+                                      <h6 class="cntntBoxitms_suffix" id="modalroichangepercentbox2">(0.00%)</h6>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+
+                              <div class="row">
+                                <div class="col-sm-12 col-md-12 col-lg-12 my-4">
+                                  <div class="card">
+                                    <h6 class="text-center mt-2 font-weight-bold">ROI Comparision </h6>
+                                    <div class="card-body chartsvg" id="modalroibaseChart2">
+
+                                    </div>
+                                  </div>
+
+                                </div>
+
+
+                              </div>
+                            </div>
+
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <!------------------Modal Boxes 2 End Here------------------>
+
+                <!------------------Modal Boxes 3 Start Here------------------>
+                <div class="modal fade scenarioModal_3" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
+                  aria-hidden="true">
+                  <div class="modal-dialog modal-lg" role="document">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h6 class="scnarcntmainhdr m-0">Analysis Three</h6>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                          <span aria-hidden="true">
+                            <i class="fa fa-times-circle white" aria-hidden="true"></i>
+                          </span>
+                        </button>
+                      </div>
+                      <div id="modal3body" class="modal-body">
+                        <div class="card-body" id="scnrcomprsltmodalBox3">
+
+                          <ul class="nav nav-tabs" id="modalmyTab3" role="tablist">
+                            <li class="nav-item tabtextitem">
+                              <a class="nav-link active" id="modalcontribution-tab3" data-toggle="tab" href="#modalcontribution3"
+                                role="tab" aria-controls="modalcontribution3" aria-selected="true">Contribution</a>
+                            </li>
+                            <li class="nav-item tabtextitem">
+                              <a class="nav-link" id="modalroi-tab3" data-toggle="tab" href="#modalroi3" role="tab"
+                                aria-controls="modalroi3" aria-selected="false">
+                                ROI </a>
+                            </li>
+
+                          </ul>
+                          <div class="tab-content" id="modalmyTabContent3">
+                            <div class="tab-pane fade show active" id="modalcontribution3" role="tabpanel"
+                              aria-labelledby="modalcontribution-tab3">
+                              <form id="modalscnrrsltform3">
+                                <div class="row my-4">
+                                  <div class="col-sm-12 col-md-4 col-lg-4">
+                                    <p>Product Group</p>
+                                    <select id="modalproductdropdown3" class="custom-select scnrrsltselct" onchange="modalfilter(this.id);">
+                                      <option selected>All</option>
+                                      <option value="1">Product 1</option>
+                                      <option value="2">Product 2</option>
+                                      <option value="3">Product 3</option>
+                                      <option value="4">Product 4</option>
+                                      <option value="5">Product 5</option>
+                                    </select>
+                                  </div>
+                                  <div class="col-sm-12 col-md-4 col-lg-4">
+                                    <p>Channel</p>
+                                    <select id="modalchanneldropdown3" class="custom-select scnrrsltselct" onchange="modalfilter(this.id);">
+                                      <option selected>All</option>
+                                      <option value="1">Consumer Outreach</option>
+                                      <option value="2">Trade-OTA</option>
+                                      <option value="3">Trade</option>
+                                      <option value="4">Web</option>
+                                    </select>
+                                  </div>
+                                  <div class="col-sm-12 col-md-4 col-lg-4">
+                                    <p>Country</p>
+                                    <select id="modalcountrydropdown3" class="custom-select scnrrsltselct" onchange="modalfilter(this.id);">
+                                      <option selected>All</option>
+                                      <option value="1">USA</option>
+                                      <option value="2">CAN</option>
+                                    </select>
+                                  </div>
+
+                                </div>
+                              </form>
+
+                              <div class="row my-4">
+                                <div class="col-sm-12 col-md-4 col-lg-4">
+                                  <div class="card contntBox">
+                                    <div class="card-body">
+                                      <p class="cntntBoxhdr">New Scenario 3 Sales</p>
+                                      <h4 class="cntntBoxitms" id="modalnewscnrbookonslct3">0</h4>
+                                    </div>
+                                  </div>
+
+                                </div>
+                                <div class="col-sm-12 col-md-4 col-lg-4">
+                                  <div class="card contntBox">
+                                    <div class="card-body">
+                                      <p class="cntntBoxhdr">Base Scenario Sales</p>
+                                      <h4 class="cntntBoxitms" id="modalbasescnrbookonslct3">0</h4>
+                                    </div>
+                                  </div>
+                                </div>
+                                <div class="col-sm-12 col-md-4 col-lg-4">
+                                  <div class="card contntBox">
+                                    <div class="card-body">
+                                      <p class="cntntBoxhdr">Change In Sales</p>
+
+                                      <h4 class="cntntBoxitms" id="modalchnginspndonslct3">0
+                                        <i class="fa fa-arrow-up green" aria-hidden="true"></i>
+                                      </h4>
+                                      <h6 id="modalchnginspndonslctprcnt3" class="cntntBoxitms_suffix">(0%)</h6>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+
+                              <div class="row my-4">
+                                <div class="col-sm-12 col-md-4 col-lg-4">
+                                  <div class="card  mb-2">
+                                    <h6 class="text-center mt-2 font-weight-bold">New Scenario 3</h6>
+                                    <div class="card-body py-2" id="modalscnrrsltpieChart3"></div>
+                                  </div>
+
+                                  <div class="card">
+                                    <h6 class="text-center mt-2 font-weight-bold">Base Scenario</h6>
+                                    <div class="card-body py-2" id="modalscnrrsltpieChartBase3"></div>
+                                  </div>
+
+                                </div>
+                                <div class="col-sm-12 col-md-8 col-lg-8">
+                                  <div class="card">
+                                    <h6 class="text-center mt-2 font-weight-bold">Sales Contributions</h6>
+                                    <div class="card-body chartsvg" id="modalincrmtblowChart3">
+
+                                    </div>
+                                  </div>
+                                </div>
+
+                              </div>
+
+
+                            </div>
+                            <div class="tab-pane fade" id="modalroi3" role="tabpanel" aria-labelledby="modalroi-tab3">
+                              <div class="row my-4">
+                                <div class="col-sm-12 col-md-4 col-lg-4">
+                                  <div class="card contntBox">
+                                    <div class="card-body">
+                                      <p class="cntntBoxhdr">New Scenario 3 Overall ROI</p>
+                                      <h4 class="cntntBoxitms" id="modalnewroibox3">0</h4>
+                                    </div>
+                                  </div>
+
+                                </div>
+                                <div class="col-sm-12 col-md-4 col-lg-4">
+                                  <div class="card contntBox">
+                                    <div class="card-body">
+                                      <p class="cntntBoxhdr">Base Scenario Overall ROI</p>
+                                      <h4 class="cntntBoxitms" id="modalbaseroibox3">0</h4>
+                                    </div>
+                                  </div>
+                                </div>
+                                <div class="col-sm-12 col-md-4 col-lg-4">
+                                  <div class="card contntBox">
+                                    <div class="card-body">
+                                      <p class="cntntBoxhdr">Change In Overall ROI</p>
+
+                                      <h4 class="cntntBoxitms" id="modalroichangebox3">0.00
+                                        <i class="fa fa-arrow-up green" aria-hidden="true"></i>
+                                      </h4>
+                                      <h6 class="cntntBoxitms_suffix" id="modalroichangepercentbox3">(0.00%)</h6>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+
+                              <div class="row">
+                                <div class="col-sm-12 col-md-12 col-lg-12 my-4">
+                                  <div class="card">
+                                    <h6 class="text-center mt-2 font-weight-bold">ROI Comparision </h6>
+                                    <div class="card-body chartsvg" id="modalroibaseChart3">
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <!-- ----------------Modal Boxes 3 End Here----------------  -->
+
+
+                <!-- ----------------Modal Boxes Ends Here---------------- -->
+
+
+                <div class="row margLR5 my-4">
+                  <div class="col-sm-12 col-md-11 col-lg-11 mx-auto ">
+                    <div class="card">
+                      <h6 class="text-center mt-2 font-weight-bold">ROI Comparison</h6>
+                      <div class="card-body padLR5 py-0" id="scnrcomprsltschartBox"></div>
+                    </div>
+                  </div>
+
+                </div>
+
+                <div class="row mx-1">
+                  <div class="col-12  col-sm-12 col-md-12 col-lg-12">
+                    <div class="card">
+                      <div class="card-body py-0 px-0">
+                        <h6 class="text-center mt-2 font-weight-bold">Scenario Wise Incremental Sales</h6>
+                        <table id="scenario_comparison_table" class="table table-responsive conttbl" id="comptblBox">
+                        </table>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="row my-4">
+          <div class="col-12 col-md-12 col-sm-12 col-lg-12">
+            <button type="button" class="btn btn-raised btn-celebrity float-right" id="runscenariocomp">Run Scenario</button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <a class="scroll-to-top rounded" href="#page-top">
+    <i class="fas fa-angle-up"></i>
+  </a>
+
+
+  <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+          <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">×</span>
+          </button>
+        </div>
+        <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
+        <div class="modal-footer">
+          <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+          <a class="btn btn-primary" href="login.html">Logout</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <script type="text/javascript" src="static/js/jquery-3.2.1.min.js"></script>
+  <script type="text/javascript" src="static/js/popper.min.js"></script>
+  <script type="text/javascript" src="static/js/bootstrap-material-design.min.js"></script>
+  <script type="text/javascript" src="static/js/jquery-ui.js"></script>
+  <script type="text/javascript" src="static/js/ie10-viewport-bug-workaround.js"></script>
+  <script type="text/javascript" src="static/js/d3_v4.js"></script>
+  <script type="text/javascript" src="static/js/customscripts.js"></script>
+  <script type="text/javascript" src="static/js/slidecustoms.js"></script>
+  <script type="text/javascript" src="static/js/jquery-ui-slider-pips.js"></script>
+  <script type="text/javascript" src="static/js/tooltipster.bundle.min.js"></script>
+  <script type="text/javascript" src="static/js/revampMMX.js"></script>
+  <!-- <script type="text/javascript" src="/static/js/jspdf.min.js"></script>
+  <script type="text/javascript" src="/static/js/html2canvas.min.js"></script>
+  <script type="text/javascript" src="/static/js/rgbcolor.js"></script>
+  <script type="text/javascript" src="/static/js/StackBlur.js"></script>
+  <script type="text/javascript" src="/static/js/canvg.js"></script> -->
+
+</body>
+
+</html>

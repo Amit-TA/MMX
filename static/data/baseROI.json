@@ -1,0 +1,34 @@
+[{
+	"Value": 0.47210831971833644,
+	"Label": "DM"
+}, {
+	"Value": 1.1943363540491383,
+	"Label": "Digital"
+}, {
+	"Value": 724.87850521125768,
+	"Label": "Email"
+}, {
+	"Value": 13.965667851688117,
+	"Label": "Ext. Email"
+}, {
+	"Value": 21.318665489081614,
+	"Label": "MAGAZINE"
+}, {
+	"Value": 6.0162880052992218,
+	"Label": "Paid Search"
+}, {
+	"Value": 1.0882319513563037,
+	"Label": "Print"
+}, {
+	"Value": 25.55397066829725,
+	"Label": "RADIO"
+}, {
+	"Value": 1.2721620869668677,
+	"Label": "TRADE.COOP"
+}, {
+	"Value": 0.91346968228925451,
+	"Label": "TRADE.DMA_OTHER"
+}, {
+	"Value": 5.9928377735628064,
+	"Label": "TV"
+}]
